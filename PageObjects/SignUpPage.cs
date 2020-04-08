@@ -46,7 +46,6 @@ namespace UnitTestProject1.PageObjects
             TxtUsername().SendKeys(username);
             TxtPassword().SendKeys(password);
             BtnSignUp().Click();
-            driver.SwitchTo().Alert().Accept();
         }
 
     }

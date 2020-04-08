@@ -28,8 +28,8 @@ namespace UnitTestProject1
         {
             signUpPage.SignUpApplication("hello@world.ro", "aTELIETTESTARE1");
 
-            var expectedResult = driver.FindElement(By.Id("signin2")).GetCssValue("color"); ;
-            var actualResults = OpenQA.Selenium.IsElementPresent("css=td[color=#014c8c]");
+            var expectedResult = "Sign up successful.";
+            var actualResults = driver.SwitchTo().Alert().Text;
 
             Assert.AreEqual(expectedResult, actualResults);
         }

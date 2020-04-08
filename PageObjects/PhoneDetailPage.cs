@@ -6,21 +6,28 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace UnitTestProject1.PageObjects
 {
-    public class CartPage
+    public class PhoneDetailPage
     {
         private IWebDriver driver;
         public LoggedInMenuItemControl menuItemControl => new LoggedInMenuItemControl(driver);
 
-        public CartPage(IWebDriver browser)
+        public PhoneDetailPage(IWebDriver browser)
         {
             driver = browser;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
-            wait.Until(ExpectedConditions.ElementIsVisible(productTable));
+            wait.Until(ExpectedConditions.ElementIsVisible(cart));
         }
 
-        private By productTable = By.XPath("//table[@class='table table-bordered table-hover table-striped']");
-        private IWebElement TableProduct => driver.FindElement(productTable);
+        private By cart = By.XPath("//a[@onlick='addToCart(1)']");
+        private IWebElement BtnAddToCart => driver.FindElement(cart);
 
-        
+        public CartPage NavigateToCartPage()
+        {
+            BtnAddToCart.Click();
+            driver.SwitchTo().Alert().Accept();
+            return new CartPage(driver);
+        }
+
+
     }
 }

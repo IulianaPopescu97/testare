@@ -6,28 +6,28 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace UnitTestProject1.PageObjects
 {
-    public class HomePage
+    public class PhonePage
     {
         private IWebDriver driver;
         public LoggedInMenuItemControl menuItemControl => new LoggedInMenuItemControl(driver);
 
-        public HomePage(IWebDriver browser)
+        public PhonePage(IWebDriver browser)
         {
             driver = browser;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
-            wait.Until(ExpectedConditions.ElementIsVisible(welcomeUserEmail));
+            wait.Until(ExpectedConditions.ElementIsVisible(list));
         }
 
-        private By welcomeUserEmail = By.Id("nameofuser");
-        private IWebElement LblWelcomeUserEmail => driver.FindElement(welcomeUserEmail);
+        private By list = By.Id("tbodyid");
+        private IWebElement BtnList => driver.FindElement(list);
 
-        private By phone = By.XPath("//a[@onclick='byCat('phone')']");
+        private By phone = By.XPath("//a[@href='prod.html?idp_=1']");
         private IWebElement BtnPhone => driver.FindElement(phone);
 
-        public PhonePage NavigateToPhonePage()
+        public PhoneDetailPage NavigateToPhoneDetailPage()
         {
             BtnPhone.Click();
-            return new PhonePage(driver);
+            return new PhoneDetailPage(driver);
         }
     }
 }
