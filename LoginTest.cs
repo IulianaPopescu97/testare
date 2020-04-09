@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -19,6 +20,7 @@ namespace UnitTestProject1
             driver = new ChromeDriver();
             logInPage = new LogInPage(driver);
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
             driver.Navigate().GoToUrl("https://demoblaze.com/");
             logInPage.menuItemControl.NavigateToLogInPage();
         }
@@ -37,7 +39,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void LogIn_IncorrectEmail_IncorrectPassword()
         {
-            logInPage.LogInApplication("wrongemail@uaic.ro", "ulalalaa");
+            logInPage.LogInApplication("wronguser@uaic.ro", "wrongpassword");
 
             var expectedResult = "User does not exist.";
             var actualResults = driver.SwitchTo().Alert().Text;

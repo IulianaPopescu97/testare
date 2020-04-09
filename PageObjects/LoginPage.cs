@@ -14,7 +14,8 @@ namespace UnitTestProject1.PageObjects
         public LogInPage(IWebDriver browser)
         {
             driver = browser;
-        }        
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+        }
 
         private By email = By.Id("loginusername");
         private IWebElement TxtUsername()
@@ -43,6 +44,8 @@ namespace UnitTestProject1.PageObjects
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementExists(email));
+
+            
             TxtUsername().SendKeys(username);
             TxtPassword().SendKeys(password);
             BtnLogIn().Click();

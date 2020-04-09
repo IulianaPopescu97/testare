@@ -21,7 +21,7 @@ namespace UnitTestProject1.PageObjects
         private By welcomeUserEmail = By.Id("nameofuser");
         private IWebElement LblWelcomeUserEmail => driver.FindElement(welcomeUserEmail);
 
-        private By phone = By.XPath("//a[@onclick='byCat('phone')']");
+        private By phone = By.XPath("//a[contains(text(),'phone')]");
         private IWebElement BtnPhone => driver.FindElement(phone);
 
         public PhonePage NavigateToPhonePage()

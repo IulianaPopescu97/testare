@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -19,6 +20,7 @@ namespace UnitTestProject1
             driver = new ChromeDriver();
             signUpPage = new SignUpPage(driver);
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
             driver.Navigate().GoToUrl("https://demoblaze.com/");
             signUpPage.menuItemControl.NavigateToSignUpPage();
         }
@@ -26,7 +28,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void SignUp_CorrectEmail_CorrectPassword()
         {
-            signUpPage.SignUpApplication("hello@world.ro", "helloworld");
+            signUpPage.SignUpApplication("goodemail@uaic.ro", "helloworld");
 
             var expectedResult = "Sign up successful.";
             var actualResults = driver.SwitchTo().Alert().Text;

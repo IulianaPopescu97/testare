@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using UnitTestProject1.PageObjects;
 
 namespace UnitTestProject1
@@ -17,6 +18,7 @@ namespace UnitTestProject1
             driver = new ChromeDriver();
 
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
             driver.Navigate().GoToUrl("https://demoblaze.com/");
             var loginPage = new LogInPage(driver);
             loginPage.menuItemControl.NavigateToLogInPage();

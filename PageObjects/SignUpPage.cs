@@ -14,6 +14,7 @@ namespace UnitTestProject1.PageObjects
         public SignUpPage(IWebDriver browser)
         {
             driver = browser;
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         private By email = By.Id("sign-username");
@@ -41,13 +42,9 @@ namespace UnitTestProject1.PageObjects
 
         public void SignUpApplication(string username, string password)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementExists(email));
-
             TxtUsername().SendKeys(username);
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
-
             TxtPassword().SendKeys(password);
             BtnSignUp().Click();
         }
