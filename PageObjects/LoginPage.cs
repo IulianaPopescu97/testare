@@ -41,7 +41,7 @@ namespace UnitTestProject1.PageObjects
 
         public void LogInApplication(string username, string password)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementExists(email));
             TxtUsername().SendKeys(username);
             TxtPassword().SendKeys(password);

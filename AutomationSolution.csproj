@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPhoneToCartTest.cs" />
-    <Compile Include="LoginTest.cs" />
+    <Compile Include="LogInTest.cs" />
     <Compile Include="PageObjects\CartPage.cs" />
     <Compile Include="PageObjects\Controllers\MenuItemControl.cs" />
     <Compile Include="PageObjects\HomePage.cs" />

@@ -29,5 +29,14 @@ namespace UnitTestProject1.PageObjects
             BtnPhone.Click();
             return new PhonePage(driver);
         }
+
+        private By cart = By.Id("cartur");
+        private IWebElement BtnCart => driver.FindElement(cart);
+
+        public CartPage NavigateToCartPage()
+        {
+            BtnPhone.Click();
+            return new CartPage(driver);
+        }
     }
 }

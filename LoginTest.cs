@@ -7,7 +7,7 @@ using UnitTestProject1.PageObjects;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class LoginTest
+    public class LogInTest
     {
         private IWebDriver driver;
         private LogInPage logInPage;
@@ -26,16 +26,16 @@ namespace UnitTestProject1
         [TestMethod]
         public void LogIn_CorrectEmail_CorrectPassword()
         {
-            logInPage.LogInApplication("test@uaic.ro", "aTELIETTESTARE1");
+            logInPage.LogInApplication("test@test.eu", "testare");
 
-            var expectedResult = "Welcome test@uaic.ro";
+            var expectedResult = "Welcome test@test.eu";
             var homePage = new HomePage(driver); 
 
             Assert.AreEqual(expectedResult, homePage.menuItemControl.welcomeUserEmailText);
         }
 
         [TestMethod]
-        public void Login_IncorrectEmail_IncorrectPassword()
+        public void LogIn_IncorrectEmail_IncorrectPassword()
         {
             logInPage.LogInApplication("wrongemail@uaic.ro", "ulalalaa");
 

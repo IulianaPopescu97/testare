@@ -21,11 +21,9 @@ namespace UnitTestProject1.PageObjects
         private By cart = By.XPath("//a[@onlick='addToCart(1)']");
         private IWebElement BtnAddToCart => driver.FindElement(cart);
 
-        public CartPage NavigateToCartPage()
+        public void addPhoneToCart()
         {
             BtnAddToCart.Click();
-            driver.SwitchTo().Alert().Accept();
-            return new CartPage(driver);
         }
 
 

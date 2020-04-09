@@ -9,7 +9,7 @@ namespace UnitTestProject1
     public class AddPhoneToCartTest
     {
         private IWebDriver driver;
-        private PhonePage phonePage;
+        private PhoneDetailPage phoneDetailPage;
 
         [TestInitialize]
         public void SetUp()
@@ -24,15 +24,33 @@ namespace UnitTestProject1
 
             var homePage = new HomePage(driver);
 
-            phonePage = homePage.NavigateToPhonePage();
-            var selectPhone = phonePage.NavigateToPhoneDetailPage();
-            _ = selectPhone.NavigateToCartPage();
+            var  phonePage = homePage.NavigateToPhonePage();
+            phoneDetailPage = phonePage.NavigateToPhoneDetailPage();
+            
+        }
+
+        [TestMethod]
+        public void Product_Successfully_Added_PopUp()
+        {
+            phoneDetailPage.addPhoneToCart();
+
+            var expectedResult = "Product added.";
+            var actualResults = driver.SwitchTo().Alert().Text;
+
+            Assert.AreEqual(expectedResult, actualResults);
         }
 
         [TestMethod]
         public void Should_Display_Product_In_Cart()
-        { 
-            
+        {
+            phoneDetailPage.addPhoneToCart();
+            driver.SwitchTo().Alert().Accept();
+            var homePage = new HomePage(driver);
+            homePage.NavigateToCartPage();
+
+            var expectedText = "Samsung galaxy s6";
+            var actualText = driver.FindElement(By.XPath("//*[@id='tbodyid']/tr/td[2]")).Text;
+            Assert.AreEqual(actualText, expectedText);
         }
 
         [TestCleanup]
