@@ -43,7 +43,11 @@ namespace UnitTestProject1.PageObjects
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
             wait.Until(ExpectedConditions.ElementExists(email));
+
             TxtUsername().SendKeys(username);
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+
             TxtPassword().SendKeys(password);
             BtnSignUp().Click();
         }

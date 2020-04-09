@@ -14,7 +14,7 @@ namespace UnitTestProject1.PageObjects
         public HomePage(IWebDriver browser)
         {
             driver = browser;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(welcomeUserEmail));
         }
 

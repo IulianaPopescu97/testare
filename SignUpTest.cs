@@ -26,7 +26,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void SignUp_CorrectEmail_CorrectPassword()
         {
-            signUpPage.SignUpApplication("hello@world.ro", "aTELIETTESTARE1");
+            signUpPage.SignUpApplication("hello@world.ro", "helloworld");
 
             var expectedResult = "Sign up successful.";
             var actualResults = driver.SwitchTo().Alert().Text;

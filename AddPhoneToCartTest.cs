@@ -20,7 +20,7 @@ namespace UnitTestProject1
             driver.Navigate().GoToUrl("https://demoblaze.com/");
             var loginPage = new LogInPage(driver);
             loginPage.menuItemControl.NavigateToLogInPage();
-            loginPage.LogInApplication("test@uaic.ro", "aTELIETTESTARE1");
+            loginPage.LogInApplication("test@test.eu", "testare");
 
             var homePage = new HomePage(driver);
 
@@ -30,20 +30,14 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Product_Successfully_Added_PopUp()
+        public void Product_Added_Successfully_In_Cart()
         {
             phoneDetailPage.addPhoneToCart();
-
             var expectedResult = "Product added.";
             var actualResults = driver.SwitchTo().Alert().Text;
 
             Assert.AreEqual(expectedResult, actualResults);
-        }
 
-        [TestMethod]
-        public void Should_Display_Product_In_Cart()
-        {
-            phoneDetailPage.addPhoneToCart();
             driver.SwitchTo().Alert().Accept();
             var homePage = new HomePage(driver);
             homePage.NavigateToCartPage();
