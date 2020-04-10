@@ -38,6 +38,10 @@ namespace UnitTestProject1
         public void InitializeTest()
         {
             verificationErrors = new StringBuilder();
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
+            driver.Navigate().GoToUrl("https://demoblaze.com/");
         }
         [TestCleanup]
         public void CleanupTest()
@@ -47,13 +51,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void ThePrevOrderTest()
         {
-            driver.Navigate().GoToUrl("https://www.demoblaze.com/index.html");
-            driver.FindElement(By.Id("login2")).Click();
-            driver.FindElement(By.Id("loginusername")).Click();
-            driver.FindElement(By.Id("loginusername")).Clear();
-            driver.FindElement(By.Id("loginusername")).SendKeys("mariusvornicu");
-            driver.FindElement(By.Id("loginpassword")).Clear();
-            driver.FindElement(By.Id("loginpassword")).SendKeys("demoblazetest");
             driver.FindElement(By.XPath("(//button[@type='button'])[9]")).Click();
             driver.FindElement(By.LinkText("Sony vaio i7")).Click();
             driver.FindElement(By.LinkText("Add to cart")).Click();
@@ -63,7 +60,7 @@ namespace UnitTestProject1
             driver.FindElement(By.XPath("(//button[@type='button'])[30]")).Click();
             driver.FindElement(By.Id("name")).Click();
             driver.FindElement(By.Id("name")).Clear();
-            driver.FindElement(By.Id("name")).SendKeys("Marius Vornicu");
+            driver.FindElement(By.Id("name")).SendKeys("Nume Persoana");
             driver.FindElement(By.Id("country")).Clear();
             driver.FindElement(By.Id("country")).SendKeys("Romania");
             driver.FindElement(By.Id("city")).Clear();
@@ -71,9 +68,6 @@ namespace UnitTestProject1
             driver.FindElement(By.Id("card")).Clear();
             driver.FindElement(By.Id("card")).SendKeys("4xxx-xxxx-xxxx-xxx0");
             driver.FindElement(By.Id("month")).Click();
-            driver.FindElement(By.Id("month")).Clear();
-            driver.FindElement(By.Id("month")).SendKeys("02");
-            driver.FindElement(By.Id("month")).SendKeys(Keys.Down);
             driver.FindElement(By.Id("month")).Clear();
             driver.FindElement(By.Id("month")).SendKeys("02");
             driver.FindElement(By.Id("year")).Click();

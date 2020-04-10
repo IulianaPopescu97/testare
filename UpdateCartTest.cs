@@ -1,9 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Text;
 using UnitTestProject1.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using System.Text;
 
 namespace UnitTestProject1
 {
@@ -15,12 +17,8 @@ namespace UnitTestProject1
         private static string baseURL;
         private bool acceptNextAlert = true;
 
-        [ClassInitialize]
-        public static void InitializeClass(TestContext testContext)
-        {
-            driver = new ChromeDriver();
-            baseURL = "https://www.google.com/";
-        }
+        public static string BaseURL { get { return baseURL; } set => baseURL = value; }
+
 
         [ClassCleanup]
         public static void CleanupClass()
@@ -38,9 +36,13 @@ namespace UnitTestProject1
         }
 
         [TestInitialize]
-        public void InitializeTest()
+        public void SetUp()
         {
             verificationErrors = new StringBuilder();
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
+            driver.Navigate().GoToUrl("https://demoblaze.com/");
         }
 
         [TestCleanup]
@@ -59,6 +61,7 @@ namespace UnitTestProject1
             driver.FindElement(By.Id("loginusername")).SendKeys("mariusvornicu");
             driver.FindElement(By.Id("loginpassword")).Clear();
             driver.FindElement(By.Id("loginpassword")).SendKeys("demoblazetest");
+            Thread.Sleep(1000);
             driver.FindElement(By.XPath("(//button[@type='button'])[9]")).Click();
             driver.FindElement(By.LinkText("Monitors")).Click();
             driver.FindElement(By.LinkText("Apple monitor 24")).Click();
