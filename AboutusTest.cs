@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Text;
+using System.Threading;
 using UnitTestProject1.PageObjects;
 
 namespace UnitTestProject1
@@ -15,12 +16,8 @@ namespace UnitTestProject1
         private static string baseURL;
         private bool acceptNextAlert = true;
 
-        [ClassInitialize]
-        public static void InitializeClass(TestContext testContext)
-        {
-            driver = new ChromeDriver();
-            baseURL = "https://www.google.com/";
-        }
+        public static string BaseURL { get => baseURL; set => baseURL = value; }
+
 
         [ClassCleanup]
         public static void CleanupClass()
@@ -38,9 +35,13 @@ namespace UnitTestProject1
         }
 
         [TestInitialize]
-        public void InitializeTest()
+        public void SetUp()
         {
             verificationErrors = new StringBuilder();
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
+            driver.Navigate().GoToUrl("https://demoblaze.com/");
         }
 
         [TestCleanup]
@@ -52,21 +53,11 @@ namespace UnitTestProject1
         [TestMethod]
         public void TheAboutusTest()
         {
-            driver.Navigate().GoToUrl("https://demoblaze.com/index.html");
-            driver.FindElement(By.Id("login2")).Click();
-            driver.FindElement(By.Id("loginusername")).Click();
-            driver.FindElement(By.Id("loginusername")).Clear();
-            driver.FindElement(By.Id("loginusername")).SendKeys("mariusvornicu");
-            driver.FindElement(By.Id("loginpassword")).Clear();
-            driver.FindElement(By.Id("loginpassword")).SendKeys("demoblazetest");
-            driver.FindElement(By.XPath("(//button[@type='button'])[9]")).Click();
             driver.FindElement(By.LinkText("About us")).Click();
-            driver.FindElement(By.XPath("//div[@id='example-video']/button/span")).Click();
-            driver.FindElement(By.XPath("//div[@id='example-video']/div[4]/div/div")).Click();
-            driver.FindElement(By.XPath("//div[@id='example-video']/div[4]/button[4]/span")).Click();
-            driver.FindElement(By.XPath("//div[@id='example-video']/div[4]/button[4]/span")).Click();
-            driver.FindElement(By.XPath("//div[@id='example-video']/div[4]/button/span")).Click();
-            driver.FindElement(By.XPath("(//button[@type='button'])[25]")).Click();
+            driver.FindElement(By.XPath("//div[@id='example-video']/button")).Click();
+            Thread.Sleep(2000); //let video play for 2 seconds
+            driver.FindElement(By.XPath("//*[@id='videoModal']/div/div/div[3]/button")).Click();
+            Assert.IsTrue(true); //About us successfully opened and closed
         }
         private bool IsElementPresent(By by)
         {
