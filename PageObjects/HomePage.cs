@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using UnitTestProject1.PageObjects.Controllers;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+using System.Collections.Generic;
 
 namespace UnitTestProject1.PageObjects
 {
@@ -23,6 +24,16 @@ namespace UnitTestProject1.PageObjects
 
         private By phone = By.XPath("//a[contains(text(),'phone')]");
         private IWebElement BtnPhone => driver.FindElement(phone);
+
+        private By products = By.CssSelector("[id='tbodyid'] div");
+        private IList<IWebElement> LstProducts => driver.FindElements(products);
+
+        public PhoneDetailPage GoToSpecificProduct(int prodOrder)
+        {
+            IWebElement BtnPhone = LstProducts[prodOrder];
+            BtnPhone.Click();
+            return new PhoneDetailPage(driver);
+        }
 
         public PhonePage NavigateToPhonePage()
         {

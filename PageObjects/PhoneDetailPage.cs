@@ -18,12 +18,15 @@ namespace UnitTestProject1.PageObjects
             wait.Until(ExpectedConditions.ElementIsVisible(cart));
         }
 
-        private By cart = By.XPath("//a[@onlick='addToCart(1)']");
+        private By cart = By.CssSelector("a[onclick^='addToCart']");
         private IWebElement BtnAddToCart => driver.FindElement(cart);
 
         public void addPhoneToCart()
         {
             BtnAddToCart.Click();
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            driver.SwitchTo().Alert().Accept();
         }
 
 

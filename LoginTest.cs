@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using UnitTestProject1.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace UnitTestProject1
 {
@@ -42,6 +43,8 @@ namespace UnitTestProject1
             logInPage.LogInApplication("wronguser@uaic.ro", "wrongpassword");
 
             var expectedResult = "User does not exist.";
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            wait.Until(ExpectedConditions.AlertIsPresent());
             var actualResults = driver.SwitchTo().Alert().Text;
 
             Assert.AreEqual(expectedResult, actualResults);

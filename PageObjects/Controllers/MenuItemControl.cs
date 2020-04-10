@@ -22,6 +22,24 @@ namespace UnitTestProject1.PageObjects.Controllers
 
         private By cart = By.Id("cartur");
         private IWebElement BtnCart => driver.FindElement(cart);
+
+        public ContactPage NavigateToContactPage()
+        {
+            BtnContact.Click();
+            return new ContactPage(driver);
+        }
+
+        public HomePage NavigateToHomePage()
+        {
+            BtnHome.Click();
+            return new HomePage(driver);
+        }
+
+        public CartPage NavigateToCart()
+        {
+            BtnCart.Click();
+            return new CartPage(driver);
+        }
     }
 
     public class LoggedOutMenuItemControl: MenuItemControl
