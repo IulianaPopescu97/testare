@@ -59,12 +59,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutusTest.cs" />
+    <Compile Include="AddOrderTest.cs" />
     <Compile Include="AddPhoneToCartTest.cs" />
     <Compile Include="LogInTest.cs" />
     <Compile Include="PageObjects\CartPage.cs" />
     <Compile Include="PageObjects\Controllers\MenuItemControl.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="PageObjects\LogInPage.cs" />
+    <Compile Include="PageObjects\OrderDetailsPage.cs" />
     <Compile Include="PageObjects\PhoneDetailPage.cs" />
     <Compile Include="PageObjects\PhonePage.cs" />
     <Compile Include="PageObjects\SignUpPage.cs" />
@@ -72,6 +75,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="SignUpTest.cs" />
+    <Compile Include="UpdateCartTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
