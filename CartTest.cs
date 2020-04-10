@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnitTestProject1.PageObjects;
 using UnitTestProject1.PageObjects.Controllers;
@@ -51,6 +52,7 @@ namespace UnitTestProject1
 
             //Act
             cart = menu.NavigateToCart();
+            Thread.Sleep(1000); //Haven't found a method to wait for table to fully load
             var actualTotal = cart.CalculateTotal();
             var expectedTotal = cart.GetTotalPrice();
 

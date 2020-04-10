@@ -40,7 +40,8 @@ namespace UnitTestProject1.PageObjects
             double total = 0;
             foreach(IWebElement prod in LstProducts)
             {  
-                total +=  Convert.ToDouble(prod.FindElement(By.CssSelector("td:nth-of-type(3)")).Text);
+                IList<IWebElement> row = prod.FindElements(By.CssSelector("td"));
+                total += Convert.ToDouble(row[2].Text);
             }
             return total;
         }
